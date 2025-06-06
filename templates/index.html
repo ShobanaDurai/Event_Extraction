@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Extraction Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center text-primary">📢 Event Extraction Website</h2>
+        
+        <form method="POST" class="mt-4">
+            <div class="input-group mb-3">
+                <input type="url" name="url" class="form-control" placeholder="Enter News Website URL" required value="{{ url }}">
+                <button class="btn btn-primary" type="submit">Extract News</button>
+            </div>
+        </form>
+
+        {% if headlines %}
+            <div class="mt-4">
+                {% for category, news in headlines.items() %}
+                    {% if news %}
+                        <div class="card mb-3">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">{{ category }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    {% for hl in news %}
+                                        <li class="list-group-item">{{ hl }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
